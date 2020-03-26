@@ -2,6 +2,22 @@
 
 **Samuli Laine** (NVIDIA), **Tero Karras** (NVIDIA), **Jaakko Lehtinen** (NVIDIA and Aalto University), **Timo Aila** (NVIDIA)
 
+docker run -v /home/jdgalviss/applications/selfsupervised-denoising/shared:/usr/src/app/shared -p 8888:8888 -it --rm --gpus all self_supervised
+
+jupyter-lab --no-browser --allow-root --ip 0.0.0.0 --NotebookApp.custom_display_url=http://localhost:8888
+
+python selfsupervised_denoising.py --dataset-dir=/usr/src/app/datasets --validation-set=kodak --eval=/usr/src/app/models/network-00012-gauss25-n2n.pickle
+
+python selfsupervised_denoising.py --dataset-dir=/usr/src/app/datasets --validation-set=kodak --eval=/usr/src/app/models/network-00014-gauss25-blindspot-sigma_global.pickle
+
+python selfsupervised_denoising.py --dataset-dir=/usr/src/app/datasets --validation-set=kodak --eval=/usr/src/app/models/network-00033-poisson30-blindspot-sigma_global.pickle
+
+python selfsupervised_denoising.py --dataset-dir=/usr/src/app/datasets --validation-set=bsd300 --eval=/usr/src/app/models/network-00053-impulse50-blindspot-sigma_global.pickle
+
+python selfsupervised_denoising.py --dataset-dir=/usr/src/app/datasets --validation-set=kodak --eval=/usr/src/app/models/network-00031-poisson30-n2n.pickle
+
+python selfsupervised_denoising.py --dataset-dir=/usr/src/app/datasets --validation-set=bsd300 --eval=/usr/src/app/models/network-00051-impulse50-n2n.pickle
+
 **Abstract**:
 
 _We describe a novel method for training high-quality image denoising models based on unorganized collections of corrupted images. The training does not need access to clean reference images, or explicit pairs of corrupted images, and can thus be applied in situations where such data is unacceptably expensive or impossible to acquire. We build on a recent technique that removes the need for reference data by employing networks with a "blind spot" in the receptive field, and significantly improve two key aspects: image quality and training efficiency. Our result quality is on par with state-of-the-art neural network denoisers in the case of i.i.d. additive Gaussian noise, and not far behind with Poisson and impulse noise. We also successfully handle cases where parameters of the noise model are variable and/or unknown in both training and evaluation data._
